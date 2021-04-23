@@ -1,7 +1,7 @@
 import torch
 import torchvision
 from .random_dataset import RandomDataset
-
+from .manipulation_dataset import ManipDataset
 
 def get_dataset(dataset, data_dir, transform, train=True, download=False, debug_subset_size=None):
     if dataset == 'mnist':
@@ -16,6 +16,8 @@ def get_dataset(dataset, data_dir, transform, train=True, download=False, debug_
         dataset = torchvision.datasets.ImageNet(data_dir, split='train' if train == True else 'val', transform=transform, download=download)
     elif dataset == 'random':
         dataset = RandomDataset()
+    elif dataset == 'manip': # our custom dataset
+        dataset = ManipDataset(data_dir, train=train, transform=transform)
     else:
         raise NotImplementedError
 

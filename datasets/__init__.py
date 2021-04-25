@@ -17,7 +17,7 @@ def get_dataset(dataset, data_dir, transform, train=True, download=False, debug_
     elif dataset == 'random':
         dataset = RandomDataset()
     elif dataset == 'manip': # our custom dataset
-        dataset = ManipDataset(data_dir, train=train, transform=transform)
+        dataset = ManipDataset(data_dir, train=train, transform=transform, env='plate') # use a subset
     else:
         raise NotImplementedError
 

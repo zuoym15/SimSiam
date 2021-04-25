@@ -24,8 +24,14 @@ class SimSiamTransform():
             T.Normalize(*mean_std)
         ])
     def __call__(self, x):
-        x1 = self.transform(x)
-        x2 = self.transform(x)
+        if isinstance(x, list) or isinstance(x, tuple):
+            assert len(x) == 2
+            x1 = self.transform(x[0])
+            x2 = self.transform(x[1])
+        else:
+            x1 = self.transform(x)
+            x2 = self.transform(x)
+            
         return x1, x2 
 
 

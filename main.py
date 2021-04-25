@@ -90,7 +90,15 @@ def main(device, args):
         epoch_dict = {"epoch":epoch, "accuracy":accuracy}
         global_progress.set_postfix(epoch_dict)
         logger.update_scalers(epoch_dict)
-    
+
+        # Save checkpoint
+        if epoch % (args.train.stop_at_epoch // 10) == 0:
+            model_path = os.path.join(args.ckpt_dir, f"{args.name}_{datetime.now().strftime('%m%d%H%M%S')}.pth") # datetime.now().strftime('%Y%m%d_%H%M%S')
+            torch.save({
+                'epoch': epoch+1,
+                'state_dict':model.module.state_dict()
+            }, model_path)
+
     # Save checkpoint
     model_path = os.path.join(args.ckpt_dir, f"{args.name}_{datetime.now().strftime('%m%d%H%M%S')}.pth") # datetime.now().strftime('%Y%m%d_%H%M%S')
     torch.save({

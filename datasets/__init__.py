@@ -1,7 +1,7 @@
 import torch
 import torchvision
 from .random_dataset import RandomDataset
-from .manipulation_dataset import ManipDataset
+from .manipulation_dataset import ManipDataset, ManipObjDataset
 
 def get_dataset(dataset, data_dir, transform, train=True, download=False, debug_subset_size=None):
     if dataset == 'mnist':
@@ -20,6 +20,8 @@ def get_dataset(dataset, data_dir, transform, train=True, download=False, debug_
         dataset = ManipDataset(data_dir, train=train, transform=transform, env='plate') # use a subset
     elif dataset == 'manip_time': # our custom dataset
         dataset = ManipDataset(data_dir, train=train, transform=transform, env='plate', do_time_bootstrap=True) # use a subset
+    elif dataset == 'manip_obj': # object-centric manip dataset
+        dataset = ManipObjDataset(data_dir, train=train, transform=transform, env='plate') # use a subset
     else:
         raise NotImplementedError
 

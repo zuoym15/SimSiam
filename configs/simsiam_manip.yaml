@@ -1,13 +1,15 @@
-name: simsiam-manip-experiment-resnet18
+name: simsiam-manip-experiment-shallownet-window
 dataset: 
   name: manip
-  image_size: 224
+  env: window
+  image_size: 84
   num_workers: 4
 
 model: 
-  name: simsiam
-  backbone: resnet18_cifar_variant1
-  proj_layers: 2
+  name: simsiam_shallow
+  
+  # backbone: resnet18_cifar_variant1
+  # proj_layers: 2
 
 train:
   optimizer: 

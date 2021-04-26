@@ -3,7 +3,7 @@ import torchvision
 from .random_dataset import RandomDataset
 from .manipulation_dataset import ManipDataset, ManipObjDataset
 
-def get_dataset(dataset, data_dir, transform, train=True, download=False, debug_subset_size=None):
+def get_dataset(dataset, data_dir, transform, train=True, download=False, debug_subset_size=None, env=''):
     if dataset == 'mnist':
         dataset = torchvision.datasets.MNIST(data_dir, train=train, transform=transform, download=download)
     elif dataset == 'stl10':
@@ -17,11 +17,11 @@ def get_dataset(dataset, data_dir, transform, train=True, download=False, debug_
     elif dataset == 'random':
         dataset = RandomDataset()
     elif dataset == 'manip': # our custom dataset
-        dataset = ManipDataset(data_dir, train=train, transform=transform, env='plate') # use a subset
+        dataset = ManipDataset(data_dir, train=train, transform=transform, env=env) # use a subset
     elif dataset == 'manip_time': # our custom dataset
-        dataset = ManipDataset(data_dir, train=train, transform=transform, env='plate', do_time_bootstrap=True) # use a subset
+        dataset = ManipDataset(data_dir, train=train, transform=transform, env=env, do_time_bootstrap=True) # use a subset
     elif dataset == 'manip_obj': # object-centric manip dataset
-        dataset = ManipObjDataset(data_dir, train=train, transform=transform, env='plate') # use a subset
+        dataset = ManipObjDataset(data_dir, train=train, transform=transform, env=env) # use a subset
     else:
         raise NotImplementedError
 

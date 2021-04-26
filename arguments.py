@@ -88,6 +88,7 @@ def get_args():
     }
     vars(args)['dataset_kwargs'] = {
         'dataset':args.dataset.name,
+        'env':args.dataset.env,
         'data_dir': args.data_dir,
         'download':args.download,
         'debug_subset_size': args.debug_subset_size if args.debug else None,

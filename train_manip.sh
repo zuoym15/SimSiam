@@ -1,2 +1,2 @@
 # CUDA_VISIBLE_DEVICES=0 python main.py --data_dir /projects/katefgroup/datasets/manipulation/processed/ad --log_dir ../logs/ -c configs/simsiam_manip.yaml --ckpt_dir ./outputs/
- CUDA_VISIBLE_DEVICES=0 python main.py --data_dir /projects/katefgroup/datasets/manipulation/processed/ad --log_dir ../logs/ -c configs/simsiam_manip_time.yaml --ckpt_dir ./outputs/
+ CUDA_VISIBLE_DEVICES=0 python main.py --data_dir /projects/katefgroup/datasets/manipulation/processed/ad --log_dir ../logs/ -c configs/simsiam_manip.yaml --ckpt_dir ./outputs/

@@ -8,6 +8,7 @@ import time
 from tqdm import tqdm
 
 import datasets.utils_geom as utils_geom
+# import utils_geom
 
 class ManipDataset(torch.utils.data.Dataset):
     def __init__(self, data_dir, train=True, transform=None, env='', do_time_bootstrap=False):
@@ -189,12 +190,11 @@ class ManipObjDataset(torch.utils.data.Dataset):
         rgb = transforms.ToPILImage()(np.uint8(rgb))
 
         if self.debug:
-            if xmin < 0 or ymin < 0 or xmax >= w or ymax >= h:
-                save_filename = os.path.join('debug', self.records[idx] + '.jpg')
-                rgb_raw.save(save_filename)
-                save_filename_obj = os.path.join('debug', self.records[idx] + '_box.jpg')
-                rgb.save(save_filename_obj)
-                print(save_filename, xmin, ymin, xmax, ymax)
+            save_filename = os.path.join('debug', self.records[idx] + '.jpg')
+            rgb_raw.save(save_filename)
+            save_filename_obj = os.path.join('debug', self.records[idx] + '_box.jpg')
+            rgb.save(save_filename_obj)
+            print(save_filename, xmin, ymin, xmax, ymax)
 
         if self.do_time_bootstrap:
             # the second frame is from the same video, but a different frame
@@ -231,7 +231,7 @@ class ManipObjDataset(torch.utils.data.Dataset):
 
 
 if __name__ == '__main__':
-    dataset = ManipObjDataset('/projects/katefgroup/datasets/manipulation/processed/ad', env='plate', debug=True)
-    for i in range(len(dataset)):
+    dataset = ManipObjDataset('/projects/katefgroup/datasets/manipulation/processed/ad', env='window', debug=True)
+    for i in range(10):
         _ = dataset[i]
 

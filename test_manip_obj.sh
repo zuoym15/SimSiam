@@ -1,0 +1,1 @@
+CUDA_VISIBLE_DEVICES=0 python embed_vis.py --data_dir /projects/katefgroup/datasets/manipulation/processed/ad --log_dir logs/ -c configs/simsiam_manip_obj_eval.yaml --ckpt_dir cache/ --hide_progress --eval_from cache/simsiam-manipobj-experiment-resnet18_0426044320.pth --from_cache

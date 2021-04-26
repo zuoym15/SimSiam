@@ -52,6 +52,9 @@ def get_args():
     parser.add_argument('--device', type=str, default='cuda' if torch.cuda.is_available() else 'cpu')
     parser.add_argument('--eval_from', type=str, default=None)
     parser.add_argument('--hide_progress', action='store_true')
+
+    # embed_vis arguments
+    parser.add_argument('--from_cache', action='store_true', help="read the features from cache or not")
     args = parser.parse_args()
 
 

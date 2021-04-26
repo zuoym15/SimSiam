@@ -1,4 +1,5 @@
 from .simsiam import SimSiam
+from .simsiam_shallow import SimSiam_Shallow
 from .byol import BYOL
 from .simclr import SimCLR
 from torchvision.models import resnet50, resnet18
@@ -21,6 +22,9 @@ def get_model(model_cfg):
         model =  SimSiam(get_backbone(model_cfg.backbone))
         if model_cfg.proj_layers is not None:
             model.projector.set_layers(model_cfg.proj_layers)
+
+    if model_cfg.name == 'simsiam_shallow':
+        model =  SimSiam_Shallow(num_filters=32)
 
     elif model_cfg.name == 'byol':
         model = BYOL(get_backbone(model_cfg.backbone))

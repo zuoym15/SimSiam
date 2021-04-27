@@ -1,6 +1,8 @@
 import torch
 import torch.nn as nn
-import torch.nn.functional as F 
+import torch.nn.functional as F
+
+from .backbones.manip import FERM
 
 # this adapted from https://github.com/PhilipZRH/ferm
 
@@ -67,21 +69,12 @@ class prediction_MLP(nn.Module):
         return x 
 
 class SimSiam_Shallow(nn.Module):
-    def __init__(self, num_filters=32):
+    def __init__(self, backbone=FERM()):
         super().__init__()
 
         # input shape should be 84 x 84
-        out_dim = 39
-        
-        self.backbone = nn.Sequential(
-            nn.Conv2d(3, num_filters, 3, stride=2),
-            nn.BatchNorm2d(num_filters),
-            nn.ReLU(inplace=True),
-            nn.Conv2d(num_filters, num_filters, 3, stride=1),
-            nn.BatchNorm2d(num_filters),
-            nn.Flatten()
-        )
-        self.projector = projection_MLP(num_filters * out_dim * out_dim)
+        self.backbone = backbone
+        self.projector = projection_MLP(backbone.output_dim)
 
         self.encoder = nn.Sequential( # f encoder
             self.backbone,
@@ -96,3 +89,6 @@ class SimSiam_Shallow(nn.Module):
         p1, p2 = h(z1), h(z2)
         L = D(p1, z2) / 2 + D(p2, z1) / 2
         return {'loss': L}
+
+    def get_feature(self, x):
+        return self.backbone(x)

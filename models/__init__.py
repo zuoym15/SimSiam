@@ -4,7 +4,7 @@ from .byol import BYOL
 from .simclr import SimCLR
 from torchvision.models import resnet50, resnet18
 import torch
-from .backbones import resnet18_cifar_variant1, resnet18_cifar_variant2
+from .backbones import resnet18_cifar_variant1, resnet18_cifar_variant2, ferm
 
 def get_backbone(backbone, castrate=True):
     backbone = eval(f"{backbone}()")
@@ -24,7 +24,7 @@ def get_model(model_cfg):
             model.projector.set_layers(model_cfg.proj_layers)
 
     if model_cfg.name == 'simsiam_shallow':
-        model =  SimSiam_Shallow(num_filters=32)
+        model =  SimSiam_Shallow(get_backbone(model_cfg.backbone))
 
     elif model_cfg.name == 'byol':
         model = BYOL(get_backbone(model_cfg.backbone))

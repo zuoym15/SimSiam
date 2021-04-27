@@ -1,13 +1,13 @@
-name: simsiam-manipobj-experiment-shallow-window
+name: simsiam-manipobj-experiment-shallow-window-test
 dataset: 
   name: manip_obj
   image_size: 84
   num_workers: 4
-  env: window
+  env: plate
 
 model: 
   name: simsiam_shallow
-#  backbone: resnet18_cifar_variant1
+  backbone: ferm
 #  proj_layers: 2
 
 train:
